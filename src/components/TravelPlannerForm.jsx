@@ -22,8 +22,9 @@ export default function TravelPlannerForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
+  const [open, setOpen] = useState(false);
   const [selectedCity, setSelectedCity] = useState("");
-  const [selectedCityData, setSelectedCityData] = useState(null);
+  const [selectedCityData, setSelectedCityData] = useState('');
   const [days, setDays] = useState(1);
   const [selectedBudget, setSelectedBudget] = useState("Cheap");
   const [selectedTraveler, setSelectedTraveler] = useState("Just Me");
@@ -50,6 +51,7 @@ export default function TravelPlannerForm() {
     const fullCity = `${city.city}, ${city.country}`;
     setSelectedCity(fullCity);
     setSearch(fullCity);
+    setOpen(false);
   };
 
   const handleSave = () => {
@@ -89,12 +91,15 @@ export default function TravelPlannerForm() {
 
           <input
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => {
+              setSearch(e.target.value)
+              setOpen(true);
+            }}
             placeholder="Search city..."
             className="w-full border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 dark:text-white rounded-xl px-4 py-4"
           />
 
-          {cities.length > 0 && (
+          {open && search.length >= 2 && cities.length > 0 && (
             <div className="absolute z-50 w-full bg-white dark:bg-zinc-800 border rounded-xl mt-2 shadow-lg">
               {cities.map((city) => (
                 <button
@@ -133,8 +138,8 @@ export default function TravelPlannerForm() {
                 key={b.title}
                 onClick={() => setSelectedBudget(b.title)}
                 className={`p-6 rounded-2xl border transition ${selectedBudget === b.title
-                    ? "border-black dark:border-white shadow-lg"
-                    : "border-gray-300 dark:border-zinc-700"
+                  ? "border-black dark:border-white shadow-lg"
+                  : "border-gray-300 dark:border-zinc-700"
                   } dark:bg-zinc-800`}
               >
                 <div className="text-4xl">{b.icon}</div>
@@ -160,8 +165,8 @@ export default function TravelPlannerForm() {
                 key={t.title}
                 onClick={() => setSelectedTraveler(t.title)}
                 className={`p-6 rounded-2xl border transition ${selectedTraveler === t.title
-                    ? "border-black dark:border-white shadow-lg"
-                    : "border-gray-300 dark:border-zinc-700"
+                  ? "border-black dark:border-white shadow-lg"
+                  : "border-gray-300 dark:border-zinc-700"
                   } dark:bg-zinc-800`}
               >
                 <div className="text-4xl">{t.icon}</div>
