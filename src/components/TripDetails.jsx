@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useFetch from "../hook/useFetch";
+import Loader from "./Loader";
 
 export default function TripDetails() {
   const { id } = useParams();
@@ -32,6 +33,10 @@ export default function TripDetails() {
       icon: data?.weather?.[0]?.icon ?? null,
     }
     : null;
+
+  if (loading) {
+    return <Loader />;
+  }
 
   if (!trip) {
     return (
@@ -110,16 +115,18 @@ export default function TripDetails() {
             </div>
 
             <div className="bg-gray-100 dark:bg-zinc-800 rounded-2xl p-6">
+              <div className="flex items-center mb-4 text-4xl">💰</div>
               <h3 className="text-xl font-semibold text-black dark:text-white">
                 Budget
               </h3>
-
               <p className="text-gray-600 dark:text-gray-400 mt-2">
                 {trip.budget}
               </p>
+
             </div>
 
             <div className="bg-gray-100 dark:bg-zinc-800 rounded-2xl p-6">
+              <div className="flex items-center mb-4 text-4xl">✈️</div>
               <h3 className="text-xl font-semibold text-black dark:text-white">
                 Travelers
               </h3>
