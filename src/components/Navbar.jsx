@@ -14,9 +14,24 @@ export default function Navbar() {
 
         <Link to='/'>
           <h1 className="text-xl font-bold text-gray-800 dark:text-white">
-            K-Shop
+            Smart Travel Planner
           </h1>
         </Link>
+        <div className="hidden md:flex items-center gap-4">
+          <Link
+            to="/create-trip"
+            className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-black dark:hover:text-white"
+          >
+            Create Trip
+          </Link>
+
+          <Link
+            to="/my-trips"
+            className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-black dark:hover:text-white"
+          >
+            My Trips
+          </Link>
+        </div>
         <div className="flex items-center space-x-4">
 
           <button onClick={toggleTheme}
@@ -27,13 +42,6 @@ export default function Navbar() {
               <Moon size={20} className="text-gray-800" />
             )}
           </button>
-
-          <div className="relative">
-
-            <Link to='/' ><button className="p-2 bg-gray-200 dark:bg-gray-700 rounded-lg">
-              <Heart size={20} className="text-gray-800 dark:text-white" />
-            </button></Link>
-          </div>
 
           {isLoggedIn && user?.name && (
             <div className="flex items-center gap-2 px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded-lg">
