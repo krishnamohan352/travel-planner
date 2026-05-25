@@ -11,13 +11,13 @@ import App from './App'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
+       <BrowserRouter>
         <AuthProvider>
-          <ThemeProvider>
+         <ThemeProvider>
             <App />
-          </ThemeProvider>
+           </ThemeProvider> 
         </AuthProvider>
-      </BrowserRouter>
+      </BrowserRouter> 
     </Provider>
   </StrictMode>,
 )
